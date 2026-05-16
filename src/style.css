@@ -16,20 +16,82 @@
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  flex-direction: column;
   min-width: 320px;
   min-height: 100vh;
-  justify-content: center;
   background: radial-gradient(circle at center, #000033 0%, #000000 100%);
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
+/* ── Tab bar ───────────────────────────────────── */
+#tab-bar {
+  display: flex;
+  justify-content: center;
+  background: rgba(0, 0, 18, 0.92);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(12px);
+  flex-shrink: 0;
+  z-index: 200;
+}
+
+.tab {
+  padding: 14px 44px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 14px;
+  font-family: inherit;
+  letter-spacing: 0.07em;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tab:hover {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.tab.active {
+  color: white;
+  border-bottom-color: #00ccff;
+}
+
+/* ── Tab panels ────────────────────────────────── */
+.tab-panel {
+  display: none;
+  flex: 1;
+}
+
+.tab-panel.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ── Relax panel ───────────────────────────────── */
 #app {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
   position: relative;
+}
+
+/* ── Focus panel ───────────────────────────────── */
+#focus-app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.focus-coming-soon {
+  font-size: 18px;
+  letter-spacing: 0.05em;
+  margin: 0;
 }
 
 canvas {
@@ -42,6 +104,141 @@ canvas {
   max-width: 100%;
   height: auto;
   touch-action: none;
+}
+
+#game-container {
+  position: relative;
+  display: inline-block;
+}
+
+#pause-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 8px 14px;
+  border: 2px solid rgba(255, 200, 0, 0.4);
+  border-radius: 8px;
+  background: rgba(0, 0, 30, 0.75);
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: inherit;
+  backdrop-filter: blur(4px);
+  transition: border-color 0.15s, background 0.15s;
+  -webkit-tap-highlight-color: transparent;
+  z-index: 10;
+}
+
+#pause-btn:hover {
+  border-color: rgba(255, 200, 0, 0.9);
+  background: rgba(50, 40, 0, 0.9);
+}
+
+#controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.control-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.control-label {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  min-width: 52px;
+  text-align: right;
+}
+
+#weapon-selector,
+#ship-selector {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.weapon-btn[data-tooltip] {
+  position: relative;
+}
+
+.weapon-btn[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: rgba(0, 5, 30, 0.96);
+  border: 1px solid rgba(0, 200, 255, 0.45);
+  border-radius: 7px;
+  color: #e0f8ff;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  padding: 7px 12px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  z-index: 100;
+  box-shadow: 0 0 14px rgba(0, 180, 255, 0.2);
+  letter-spacing: 0.02em;
+}
+
+/* caret pointing down */
+.weapon-btn[data-tooltip]::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  border: 5px solid transparent;
+  border-top-color: rgba(0, 200, 255, 0.45);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  z-index: 100;
+}
+
+.weapon-btn[data-tooltip]:hover::after,
+.weapon-btn[data-tooltip]:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.weapon-btn,
+.ship-btn {
+  padding: 10px 18px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(0, 0, 50, 0.8);
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.weapon-btn:hover,
+.ship-btn:hover {
+  border-color: rgba(0, 150, 255, 0.6);
+  background: rgba(0, 0, 100, 0.9);
+}
+
+.weapon-btn.active,
+.ship-btn.active {
+  border-color: rgba(0, 200, 255, 0.8);
+  background: rgba(0, 50, 150, 0.9);
+  box-shadow: 0 0 12px rgba(0, 150, 255, 0.4);
 }
 
 #app::before {

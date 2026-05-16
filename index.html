@@ -10,9 +10,48 @@
     <title>Rock Rollers - Space Fighter</title>
   </head>
   <body>
-    <div id="app">
-      <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+    <!-- Tab bar -->
+    <nav id="tab-bar">
+      <button class="tab active" data-tab="relax">🎮 Relax</button>
+      <button class="tab"        data-tab="focus">🎯 Focus</button>
+    </nav>
+
+    <!-- Relax tab — the game -->
+    <div id="tab-relax" class="tab-panel active">
+      <div id="app">
+        <div id="game-container">
+          <canvas id="gameCanvas" width="800" height="600"></canvas>
+          <button id="pause-btn">⏸ Pause</button>
+        </div>
+        <div id="controls">
+          <div class="control-row">
+            <span class="control-label">Weapon</span>
+            <div id="weapon-selector">
+              <button class="weapon-btn active" data-weapon="laser"  data-tooltip="1 bullet · +3 on kill · -1 if missed">🚀 Laser</button>
+              <button class="weapon-btn"        data-weapon="ak47"   data-tooltip="2 bullets · +2 on kill · -2 if missed">🔫 AK-47</button>
+              <button class="weapon-btn"        data-weapon="cannon" data-tooltip="3 bullets · +1 on kill · -3 if missed">💣 Cannon</button>
+            </div>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Ship</span>
+            <div id="ship-selector">
+              <button class="ship-btn active" data-ship="scout">🛸 Scout</button>
+              <button class="ship-btn" data-ship="viper">✈️ Viper</button>
+              <button class="ship-btn" data-ship="titan">🛡 Titan</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <!-- Focus tab — new UI -->
+    <div id="tab-focus" class="tab-panel">
+      <div id="focus-app">
+        <p class="focus-coming-soon">Focus mode — coming soon</p>
+      </div>
+    </div>
+
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
