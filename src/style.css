@@ -39,6 +39,9 @@ canvas {
   box-shadow: 0 0 30px rgba(0, 150, 255, 0.2),
               inset 0 0 20px rgba(0, 0, 0, 0.5);
   display: block;
+  max-width: 100%;
+  height: auto;
+  touch-action: none;
 }
 
 #app::before {

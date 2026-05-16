@@ -139,6 +139,15 @@ let enemies: Enemy[];
 let bullet: Bullet;
 let explosion: Explosion;
 
+// Convert a clientX/Y position to canvas logical coordinates (accounts for CSS scaling)
+function getCanvasPos(clientX: number, clientY: number) {
+  const rect = canvas.getBoundingClientRect();
+  return {
+    x: (clientX - rect.left) * (canvas.width / rect.width),
+    y: (clientY - rect.top) * (canvas.height / rect.height),
+  };
+}
+
 function initGame() {
   player = new Player();
   enemies = Array.from({ length: 4 }, () => new Enemy());
@@ -161,6 +170,39 @@ function initGame() {
     if (e.code === 'ArrowLeft' || e.code === 'ArrowRight') {
       player.x_change = 0;
     }
+  });
+
+  // Touch controls
+  const SPRITE_W = 64;
+  const SPRITE_H = 64;
+
+  canvas.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    const touch = e.touches[0];
+    const pos = getCanvasPos(touch.clientX, touch.clientY);
+
+    // Tap on the player sprite → shoot
+    if (
+      pos.x >= player.x - 10 && pos.x <= player.x + SPRITE_W + 10 &&
+      pos.y >= player.y - 10 && pos.y <= player.y + SPRITE_H + 10
+    ) {
+      bullet.fire(player.x);
+    }
+
+    // Start following the finger
+    player.x_change = 0;
+    player.x = pos.x - SPRITE_W / 2;
+  }, { passive: false });
+
+  canvas.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    const touch = e.touches[0];
+    const pos = getCanvasPos(touch.clientX, touch.clientY);
+    player.x = pos.x - SPRITE_W / 2;
+  }, { passive: false });
+
+  canvas.addEventListener('touchend', () => {
+    player.x_change = 0;
   });
 
   running = true;
