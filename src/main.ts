@@ -252,15 +252,21 @@ class Enemy {
 
 class Projectile {
   active = true;
+  x: number;
+  y: number;
+  private speed: number;
+  private color: string;
+  private w: number;
+  private h: number;
 
-  constructor(
-    public x: number,
-    public y: number,
-    private speed: number,
-    private color: string,
-    private w: number,
-    private h: number,
-  ) {}
+  constructor(x: number, y: number, speed: number, color: string, w: number, h: number) {
+    this.x = x;
+    this.y = y;
+    this.speed = speed;
+    this.color = color;
+    this.w = w;
+    this.h = h;
+  }
 
   draw() {
     ctx.fillStyle = this.color;
