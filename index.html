@@ -7,14 +7,19 @@
     <meta name="description" content="Rock Rollers - A thrilling space fighter web game built with TypeScript, Canvas, and Vite. Pilot your spaceship, shoot enemies, and score high!" />
     <meta name="keywords" content="Space Fighter, Game, TypeScript, HTML5 Canvas, Web Game, Rock Rollers" />
     <meta name="author" content="Deepthi" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <title>Rock Rollers - Space Fighter</title>
   </head>
   <body>
 
     <!-- Tab bar -->
     <nav id="tab-bar">
-      <button class="tab active" data-tab="relax">🎮 Relax</button>
-      <button class="tab"        data-tab="focus">🎯 Focus</button>
+      <div id="tab-pills">
+        <button class="tab active" data-tab="relax">🎮 Relax</button>
+        <button class="tab"        data-tab="focus">🎯 Focus</button>
+      </div>
     </nav>
 
     <!-- Relax tab — the game -->
@@ -45,11 +50,9 @@
       </div>
     </div>
 
-    <!-- Focus tab — new UI -->
+    <!-- Focus tab — notes app -->
     <div id="tab-focus" class="tab-panel">
-      <div id="focus-app">
-        <p class="focus-coming-soon">Focus mode — coming soon</p>
-      </div>
+      <div id="focus-app"></div>
     </div>
 
     <script type="module" src="/src/main.ts"></script>

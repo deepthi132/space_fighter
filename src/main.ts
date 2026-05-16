@@ -1,4 +1,5 @@
 import './style.css';
+import { initFocus } from './focus';
 
 const canvas = document.getElementById('gameCanvas') as HTMLCanvasElement;
 const ctx = canvas.getContext('2d')!;
@@ -26,6 +27,9 @@ assets.forEach(img => {
     if (imagesLoaded >= assets.length) initGame();
   };
 });
+
+// --- Focus tab init ---
+initFocus();
 
 // --- Tab switching ---
 document.querySelectorAll<HTMLButtonElement>('.tab').forEach(tab => {
