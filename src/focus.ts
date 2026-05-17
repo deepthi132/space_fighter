@@ -246,7 +246,6 @@ function renderSidebar() {
     sidebar.appendChild(title);
     sidebar.appendChild(buildSectionBox('text'));
     sidebar.appendChild(buildSectionBox('checklist'));
-    sidebar.appendChild(buildSectionBox('study'));
   } else {
     // Normal section drill-down: back btn + add btn + item list
     const topRow = document.createElement('div');
